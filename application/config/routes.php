@@ -41,11 +41,8 @@
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
-$route['rule'] = "welcome/rule";
-$route['gamelogs'] = "welcome/gamelogs";
-$route['chatlogs'] = "welcome/chatlogs";
 $route['login'] = "welcome/login";
-$route['callback'] = "welcome/callback";
+$route['logout'] = "welcome/logout";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

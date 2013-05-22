@@ -80,7 +80,7 @@ $autoload['helper'] = array('url');
 |
 */
 
-$autoload['config'] = array('app/twitter');
+$autoload['config'] = array('app/twitter', 'common/text');
 
 
 /*

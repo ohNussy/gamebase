@@ -38,24 +38,36 @@
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
-					<a class="brand" href="<?= site_url('#') ?>">gamebase</a>
-					<form class="navbar-form pull-right" action="<?= site_url('login') ?>">
-						<? if ($user) : ?>
-							<p class="navbar-text pull-right">
-								<img src="<?= $user->icon_url ?>" width="24" />
-								<?= $user->name ?>
-							</p>
-						<? else: ?>
+					<a class="brand" href="<?= site_url('') ?>">gamebase</a>
+					<? if ($user) : ?>
+						<form class="navbar-form pull-right" method="POST" action="<?= site_url('logout') ?>">
+							<button type="submit" class="btn btn-inverse">Logout</button>
+							<input type="hidden" name="dummy" value="0" />
+						</form>
+						<p class="navbar-text pull-right">
+							<img src="<?= $user->icon_url ?>" width="24" />
+							<?= $user->name ?>
+						</p>
+					<? else: ?>
+						<form class="navbar-form pull-right" method="POST" action="<?= site_url('login') ?>">
 							<button type="submit" class="btn btn-primary">Start</button>
-						<? endif; ?>
-					</form>
+							<input type="hidden" name="dummy" value="0" />
+						</form>
+					<? endif; ?>
 				</div>
 			</div>
 		</div>
 
 		<div class="container-fluid">
 			<div class="row-fluid">
-				<?= $contents ?>
+				<div class="span9">
+					<? if ($msg) : ?>
+						<div class="alert">
+							<?= $msg ?>
+						</div>
+					<? endif; ?>
+					<?= $contents ?>
+				</div>
 				<div class="span3">
 					<div class="well sidebar-nav">
 						<ul class="nav nav-list">
