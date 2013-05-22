@@ -2,7 +2,7 @@
 <html lang="ja">
 	<head>
 		<meta charset="utf-8">
-		<title>End of King -権謀術数-</title>
+		<title>gamebase</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -38,7 +38,7 @@
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
-					<a class="brand" href="<?= site_url('#') ?>">End of King -権謀術数-</a>
+					<a class="brand" href="<?= site_url('#') ?>">gamebase</a>
 					<form class="navbar-form pull-right" action="<?= site_url('login') ?>">
 						<? if ($user) : ?>
 							<p class="navbar-text pull-right">
