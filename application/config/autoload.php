@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('session', 'rb');
+$autoload['libraries'] = array('session', 'rb', 'user_agent');
 
 
 /*
@@ -80,7 +80,7 @@ $autoload['helper'] = array('url');
 |
 */
 
-$autoload['config'] = array('app/twitter', 'common/text');
+$autoload['config'] = array('app/twitter', 'common/text', 'common/game');
 
 
 /*

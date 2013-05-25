@@ -41,12 +41,15 @@
 					<a class="brand" href="<?= site_url('') ?>">gamebase</a>
 					<? if ($user) : ?>
 						<form class="navbar-form pull-right" method="POST" action="<?= site_url('logout') ?>">
+							<? if ( $greetings > 0 ) : ?>
+								&nbsp;<a href="<?= site_url('user/receive_greeting') ?>"><div class="badge badge-info"><?= $greetings ?></div></a>&nbsp;
+							<? endif; ?>
 							<button type="submit" class="btn btn-inverse">Logout</button>
 							<input type="hidden" name="dummy" value="0" />
 						</form>
 						<p class="navbar-text pull-right">
 							<img src="<?= $user->icon_url ?>" width="24" />
-							<?= $user->name ?>
+							&nbsp;<?= $user->name ?>&nbsp;
 						</p>
 					<? else: ?>
 						<form class="navbar-form pull-right" method="POST" action="<?= site_url('login') ?>">
@@ -76,6 +79,10 @@
 							<li><a href="<?= site_url('rule') ?>">ゲームのルール</a></li>
 							<li><a href="<?= site_url('gamelogs') ?>">過去のゲームログ</a></li>
 							<li><a href="<?= site_url('chatlogs') ?>">過去のチャットログ</a></li>
+							<? if ( $user ) : ?>
+								<li class="divider"></li>
+								<li><a href="<?= site_url('user/friends') ?>">フレンド一覧</a></li>
+							<? endif; ?>
 						</ul>
 					</div><!--/.well -->
 				</div><!--/span-->

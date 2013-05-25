@@ -3,8 +3,6 @@
 /**
  * 開発予定の共通機能
  *  
-	フレンド機能
-	簡易ギフト機能
 	ランキング機能
 	実績機能
 	メッセージ機能
@@ -34,24 +32,6 @@ class Welcome extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->layout = 'layout/welcome';
-
-		$this->data['user'] = R::findOne('user', 'openid = ? AND secretkey = ?', array($this->session->userdata('openid'), $this->session->userdata('secretkey')));
-		if ($this->data['user'] AND $this->data['user']->token != $this->session->userdata('token'))
-		{
-			$this->session->sess_destroy();
-			$this->session->set_flashdata(MSG, config_item('text_token_invalid'));
-		}
-		$this->data['msg'] = $this->session->flashdata(MSG);
-		
-		// TODO: 各種データ取得
-		$this->data['friends'] = array(); // フレンド
-		$this->data['greetings'] = array(); // 挨拶機能
-		$this->data['minimails'] = array(); // 未読ミニメール
-		$this->data['teamchats'] = array(); // チームチャット
-		$this->data['chats'] = array(); // ディスカッション
-		$this->data['mytimelines'] = array(); // 自身のタイムライン
-		$this->data['timelines'] = array(); // フレンドのタイムライン
 		
 	}
 
@@ -141,9 +121,22 @@ class Welcome extends MY_Controller
 	/**
 	 * ユーザデータ
 	 */
-	public function user($id)
+	public function user($id = 0)
 	{
-		
+		$user = R::load('user', $id);
+		if (!$user->id)
+		{
+			$this->session->set_flashdata(MSG, config_item('text_invalid_data'));
+			redirect('/');
+		}
+		$this->data['is_friend'] = false;
+		if ($this->data['user'])
+		{
+			$this->load->model('friend_model');
+			$this->data['is_friend'] = $this->friend_model->is_friend($this->data['user'], $user->id);		
+		}
+		$this->data['data'] = $user;
+		$this->layout_view('welcome/user', $this->layout);
 	}
 
 	/**
@@ -163,3 +156,4 @@ class Welcome extends MY_Controller
 	}
 
 }
+
