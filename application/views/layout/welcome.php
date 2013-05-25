@@ -76,6 +76,7 @@
 						<ul class="nav nav-list">
 							<li class="nav-header">■メニュー■</li>
 							<li class="active"><a href="<?= site_url('') ?>">Top</a></li>
+							<li><a href="<?= site_url('ranking/test/1') ?>">ランキング</a></li>
 							<li><a href="<?= site_url('rule') ?>">ゲームのルール</a></li>
 							<li><a href="<?= site_url('gamelogs') ?>">過去のゲームログ</a></li>
 							<li><a href="<?= site_url('chatlogs') ?>">過去のチャットログ</a></li>

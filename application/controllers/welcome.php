@@ -105,9 +105,23 @@ class Welcome extends MY_Controller
 	/**
 	 * ランキング
 	 */
-	public function ranking()
+	public function ranking($category, $page = 1)
 	{
-		
+		// カテゴリが不在ならエラー
+		$this->data['category'] = R::findOne('ranking_category', 'openid = ?', array($category));
+		if (!$this->data['category'])
+		{
+			$this->session->set_flashdata(MSG, config_item('text_invalid_data'));
+			redirect ('/');
+		}
+		$id = $this->data['category']->id;
+		// ランキングデータ取得
+		$this->load->model('ranking_model');
+		$count = 50;
+		$start = ($page - 1) * $count;
+		$this->data['data'] = $this->ranking_model->get_all_by_category($id, $start, $count);
+		// ビュー
+		$this->layout_view('welcome/ranking', $this->layout);
 	}
 
 	/**
