@@ -176,5 +176,61 @@ class User extends MY_Controller {
 		redirect($this->agent->referrer());
 	}
 
+	/**
+	 * 実績
+	 */
+	public function acheve()
+	{
+		$this->load->model('user_acheve_model');
+		$this->data['data'] = $this->user_acheve_model->get_all_by_user($this->data['user']);
+		// ビュー
+		$this->layout_view('user/acheve', $this->layout);
+	}
+
+	/**
+	 * メール
+	 */
+	public function mails($page = 1)
+	{
+		$count = 5;
+		$start = ($page - 1) * $count;
+		$this->load->model('user_mail_model');
+		$this->data['data'] = $this->user_mail_model->get_all_by_user($this->data['user'], $start, $count);
+		$this->user_mail_model->set_opened($this->data['user']);
+		// ビュー
+		$this->layout_view('user/mails', $this->layout);
+	}
+
+	/**
+	 * メール
+	 */
+	public function sendmail()
+	{
+		$id = $this->input->get_post('id');
+		$this->data['data'] = R::load('user', $id);
+		
+		$mode = $this->input->get_post('mode', 'default');
+		$this->data['body'] = $this->input->get_post('body', '');
+		switch ($mode)
+		{
+			case "transmit" :
+				if ($this->data['data'] AND $this->data['body'])
+				{
+					$this->load->model('user_mail_model');
+					$this->user_mail_model->send($this->data['user'], $this->data['data'], $this->data['body']);
+				}
+				
+				$this->layout_view('user/sendmail/transmit', $this->layout);
+				break;
+			case "confirm" :
+				$this->layout_view('user/sendmail/confirm', $this->layout);
+				break;
+			case "default" :
+			default :
+				$this->layout_view('user/sendmail/default', $this->layout);
+				break;
+		}
+	}
+
 }
 

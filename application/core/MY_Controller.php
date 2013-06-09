@@ -15,7 +15,7 @@ class MY_Controller extends CI_Controller {
 		// TODO: 各種データ取得
 		$this->data['friends'] = array(); // フレンド
 		$this->data['greetings'] = array(); // 挨拶機能
-		$this->data['minimails'] = array(); // 未読ミニメール
+		$this->data['mailexist'] = 0; // メール機能
 		$this->data['teamchats'] = array(); // チームチャット
 		$this->data['chats'] = array(); // ディスカッション
 		$this->data['mytimelines'] = array(); // 自身のタイムライン
@@ -25,6 +25,8 @@ class MY_Controller extends CI_Controller {
 		{
 			$this->load->model('greeting_model');
 			$this->data['greetings'] = $this->greeting_model->unreceive_count($this->data['user']);
+			$this->load->model('user_mail_model');
+			$this->data['mailexist'] = $this->user_mail_model->get_unread($this->data['user']); // 挨拶機能
 		}
 	}
 

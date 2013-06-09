@@ -3,9 +3,6 @@
 /**
  * 開発予定の共通機能
  *  
-	ランキング機能
-	実績機能
-	メッセージ機能
 	チーム機能
 	アバターカスタマイズ機能
 	ユーザタイムライン機能
@@ -40,6 +37,11 @@ class Welcome extends MY_Controller
 	 */
 	public function index()
 	{
+		if ( $this->data['user'] )
+		{
+			$this->load->model('user_mail_model');
+			$this->data['mails'] = $this->user_mail_model->get_all_by_user($this->data['user'], 0, 3);
+		}
 		$this->layout_view('welcome/index', $this->layout);
 	}
 
@@ -122,14 +124,6 @@ class Welcome extends MY_Controller
 		$this->data['data'] = $this->ranking_model->get_all_by_category($id, $start, $count);
 		// ビュー
 		$this->layout_view('welcome/ranking', $this->layout);
-	}
-
-	/**
-	 * 実績
-	 */
-	public function acheve()
-	{
-		
 	}
 
 	/**

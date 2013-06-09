@@ -21,6 +21,8 @@ class Rb {
 
 		// Setup DB connection
 		R::setup("mysql:host=$host;dbname=$db", $user, $pass);
+		R::setStrictTyping(false);
+		R::freeze(true);
 	}
 
 }

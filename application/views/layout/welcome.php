@@ -44,6 +44,9 @@
 							<? if ( $greetings > 0 ) : ?>
 								&nbsp;<a href="<?= site_url('user/receive_greeting') ?>"><div class="badge badge-info"><?= $greetings ?></div></a>&nbsp;
 							<? endif; ?>
+							<? if ( $mailexist > 0 ) : ?>
+								&nbsp;<a href="<?= site_url('user/mails') ?>"><div class="badge badge-success"><?= $mailexist ?></div></a>&nbsp;
+							<? endif; ?>
 							<button type="submit" class="btn btn-inverse">Logout</button>
 							<input type="hidden" name="dummy" value="0" />
 						</form>
@@ -83,6 +86,8 @@
 							<? if ( $user ) : ?>
 								<li class="divider"></li>
 								<li><a href="<?= site_url('user/friends') ?>">フレンド一覧</a></li>
+								<li><a href="<?= site_url('user/mails') ?>">メール一覧</a></li>
+								<li><a href="<?= site_url('user/acheve') ?>">実績一覧</a></li>
 							<? endif; ?>
 						</ul>
 					</div><!--/.well -->
